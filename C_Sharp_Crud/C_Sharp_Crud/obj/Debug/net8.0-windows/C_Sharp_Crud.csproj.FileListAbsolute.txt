@@ -35,3 +35,9 @@ E:\Documents\GitHub\CSharp_CRUD_Checkpoint\C_Sharp_Crud\C_Sharp_Crud\bin\Debug\n
 E:\Documents\GitHub\CSharp_CRUD_Checkpoint\C_Sharp_Crud\C_Sharp_Crud\bin\Debug\net8.0-windows\runtimes\win-x64\native\krb5_64.dll
 E:\Documents\GitHub\CSharp_CRUD_Checkpoint\C_Sharp_Crud\C_Sharp_Crud\bin\Debug\net8.0-windows\runtimes\win-x64\native\krbcc64.dll
 E:\Documents\GitHub\CSharp_CRUD_Checkpoint\C_Sharp_Crud\C_Sharp_Crud\obj\Debug\net8.0-windows\C_Sharp_.21211235.Up2Date
+E:\Documents\GitHub\CSharp_CRUD_Checkpoint\C_Sharp_Crud\C_Sharp_Crud\bin\Debug\net8.0-windows\System.DirectoryServices.Protocols.dll
+E:\Documents\GitHub\CSharp_CRUD_Checkpoint\C_Sharp_Crud\C_Sharp_Crud\bin\Debug\net8.0-windows\System.Security.Cryptography.Pkcs.dll
+E:\Documents\GitHub\CSharp_CRUD_Checkpoint\C_Sharp_Crud\C_Sharp_Crud\bin\Debug\net8.0-windows\runtimes\linux\lib\net8.0\System.DirectoryServices.Protocols.dll
+E:\Documents\GitHub\CSharp_CRUD_Checkpoint\C_Sharp_Crud\C_Sharp_Crud\bin\Debug\net8.0-windows\runtimes\osx\lib\net8.0\System.DirectoryServices.Protocols.dll
+E:\Documents\GitHub\CSharp_CRUD_Checkpoint\C_Sharp_Crud\C_Sharp_Crud\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.DirectoryServices.Protocols.dll
+E:\Documents\GitHub\CSharp_CRUD_Checkpoint\C_Sharp_Crud\C_Sharp_Crud\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
