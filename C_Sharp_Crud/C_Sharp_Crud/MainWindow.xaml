@@ -1,22 +1,43 @@
 ﻿<Window x:Class="C_Sharp_Crud.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Sistema Escolar CRUD" Height="450" Width="600">
+        Title="Sistema Escolar CRUD - FIAP" Height="550" Width="800">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Background="#F0F0F0">
-            <TextBlock Text="Menu" FontSize="18" HorizontalAlignment="Center" Margin="10"/>
-            <Button Content="1 - Inserir Aluno" Click="BtnInserir_Click" Margin="5"/>
-            <Button Content="2 - Listar Alunos" Click="BtnListar_Click" Margin="5"/>
-            <Button Content="3 - Atualizar Aluno" Click="BtnAtualizar_Click" Margin="5"/>
-            <Button Content="4 - Remover Aluno" Click="BtnRemover_Click" Margin="5"/>
-            <Button Content="5 - Sair" Click="BtnSair_Click" Margin="5"/>
+        <StackPanel Grid.Column="0" Background="#F8F8F8" Margin="10,10,10,10">
+            <TextBlock Text="Dados do Aluno" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <TextBlock Text="ID (para Atualizar/Remover/Busca):"/>
+            <TextBox x:Name="txtId" Margin="0,0,0,10" Padding="3"/>
+
+            <TextBlock Text="Nome:"/>
+            <TextBox x:Name="txtNome" Margin="0,0,0,10" Padding="3"/>
+
+            <TextBlock Text="Idade:"/>
+            <TextBox x:Name="txtIdade" Margin="0,0,0,20" Padding="3"/>
+
+            <Separator Margin="0,0,0,10"/>
+
+            <Button Content="1 - Inserir Aluno" Click="BtnInserir_Click" Margin="0,5" Height="30" Background="#E1F5FE"/>
+            <Button Content="2 - Listar Alunos" Click="BtnListar_Click" Margin="0,5" Height="30"/>
+            <Button Content="3 - Atualizar Aluno" Click="BtnAtualizar_Click" Margin="0,5" Height="30"/>
+            <Button Content="4 - Remover Aluno" Click="BtnRemover_Click" Margin="0,5" Height="30"/>
+            <Button Content="5 - Buscar Aluno por ID" Click="BtnBuscar_Click" Margin="0,5" Height="30" Background="#E8F5E9"/>
+            <Button Content="6 - Sair" Click="BtnSair_Click" Margin="0,5" Height="30" Background="#FFEBEE"/>
         </StackPanel>
 
-        <DataGrid x:Name="dgAlunos" Grid.Column="1" Margin="10" AutoGenerateColumns="True" IsReadOnly="True"/>
+        <Grid Grid.Column="1" Margin="10,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Lista de Alunos (Banco Oracle FIAP)" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+            <DataGrid x:Name="dgAlunos" Grid.Row="1" AutoGenerateColumns="True" IsReadOnly="True" AlternatingRowBackground="#F0F0F0"/>
+        </Grid>
     </Grid>
 </Window>

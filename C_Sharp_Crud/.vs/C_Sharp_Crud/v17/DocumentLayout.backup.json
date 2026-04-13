@@ -26,8 +26,8 @@
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "E:\\Documents\\GitHub\\CSharp_CRUD_Checkpoint\\C_Sharp_Crud\\C_Sharp_Crud\\MainWindow.xaml",
               "RelativeDocumentMoniker": "C_Sharp_Crud\\MainWindow.xaml",
-              "ToolTip": "E:\\Documents\\GitHub\\CSharp_CRUD_Checkpoint\\C_Sharp_Crud\\C_Sharp_Crud\\MainWindow.xaml",
-              "RelativeToolTip": "C_Sharp_Crud\\MainWindow.xaml",
+              "ToolTip": "E:\\Documents\\GitHub\\CSharp_CRUD_Checkpoint\\C_Sharp_Crud\\C_Sharp_Crud\\MainWindow.xaml*",
+              "RelativeToolTip": "C_Sharp_Crud\\MainWindow.xaml*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2026-04-13T11:48:04.196Z",
               "EditorCaption": ""
@@ -40,14 +40,10 @@
               "RelativeDocumentMoniker": "C_Sharp_Crud\\MainWindow.xaml.cs",
               "ToolTip": "E:\\Documents\\GitHub\\CSharp_CRUD_Checkpoint\\C_Sharp_Crud\\C_Sharp_Crud\\MainWindow.xaml.cs",
               "RelativeToolTip": "C_Sharp_Crud\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAowDgAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-13T11:47:57.859Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

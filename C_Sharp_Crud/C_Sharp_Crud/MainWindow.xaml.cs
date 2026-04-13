@@ -1,115 +1,230 @@
 ﻿using System;
-using Oracle.ManagedDataAccess.Client;
 using System.Data;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Oracle.ManagedDataAccess.Client;
 
 namespace C_Sharp_Crud
 {
     public partial class MainWindow : Window
     {
-
-        string connectionString = "User Id=RM553236;Password=Apollo#26;Data Source=oracle.fiap.com.br:1521/ORCL;";
+        // String de conexão no Banco de Dados
+        string connectionString = "User Id=RM553236;Password=080799;Data Source=oracle.fiap.com.br:1521/ORCL;";
 
         public MainWindow()
         {
             InitializeComponent();
+            ListarAlunos();
         }
 
-        // 1. Insere um novo Aluno no banco de dados
+        // --- EVENTOS DE CLIQUE DOS BOTÕES ---
+
+        // Inserir
+        private void BtnInserir_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string nome = txtNome.Text;
+                if (int.TryParse(txtIdade.Text, out int idade) && !string.IsNullOrWhiteSpace(nome))
+                {
+                    InserirAluno(nome, idade);
+                    ListarAlunos(); // Atualiza a grade
+                    LimparCampos();
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, preencha Nome e Idade corretamente.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao inserir: " + ex.Message);
+            }
+        }
+
+        // Listar
+        private void BtnListar_Click(object sender, RoutedEventArgs e)
+        {
+            ListarAlunos();
+        }
+
+        // Atualizar
+        private void BtnAtualizar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (int.TryParse(txtId.Text, out int id) &&
+                    int.TryParse(txtIdade.Text, out int idade) &&
+                    !string.IsNullOrWhiteSpace(txtNome.Text))
+                {
+                    AtualizarAluno(id, txtNome.Text, idade);
+                    ListarAlunos();
+                    LimparCampos();
+                }
+                else
+                {
+                    MessageBox.Show("Preencha ID, Nome e Idade para atualizar.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao atualizar: " + ex.Message);
+            }
+        }
+
+        // Remover
+        private void BtnRemover_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (int.TryParse(txtId.Text, out int id))
+                {
+                    RemoverAluno(id);
+                    ListarAlunos();
+                    LimparCampos();
+                }
+                else
+                {
+                    MessageBox.Show("Informe um ID válido para remover.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao remover: " + ex.Message);
+            }
+        }
+
+        // Buscar por ID
+        private void BtnBuscar_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(txtId.Text, out int id))
+            {
+                BuscarPorId(id);
+            }
+            else
+            {
+                MessageBox.Show("Por favor, insira um ID numérico válido para buscar.");
+            }
+        }
+
+        private void BtnSair_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+
+        // --- MÉTODOS DE LÓGICA  ---
+
+        // Inserir um novo aluno no banco
         private void InserirAluno(string nome, int idade)
         {
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
                 string query = "INSERT INTO Alunos (Nome, Idade) VALUES (:nome, :idade)";
                 OracleCommand cmd = new OracleCommand(query, conn);
-                cmd.Parameters.Add(new OracleParameter("nome", nome));
-                cmd.Parameters.Add(new OracleParameter("idade", idade));
-
+                cmd.Parameters.Add("nome", nome);
+                cmd.Parameters.Add("idade", idade);
                 conn.Open();
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("Aluno inserido com sucesso!");
+                MessageBox.Show("Aluno cadastrado!");
             }
         }
 
-        // 2. LISTAR (SELECT)
+        // Listar todos os alunos na DataGrid
         private void ListarAlunos()
         {
-            using (OracleConnection conn = new OracleConnection(connectionString))
+            try
             {
-                string query = "SELECT * FROM Alunos";
-                OracleDataAdapter da = new OracleDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                dgAlunos.ItemsSource = dt.DefaultView;
+                using (OracleConnection conn = new OracleConnection(connectionString))
+                {
+                    string query = "SELECT * FROM Alunos ORDER BY Id ASC";
+                    OracleDataAdapter da = new OracleDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    dgAlunos.ItemsSource = dt.DefaultView;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao listar: " + ex.Message);
             }
         }
 
-        // 3. Atualiza os dados do Aluno
-        private void AtualizarAluno(int id, string novoNome, int novaIdade)
+        // Atualizar um aluno existente
+        private void AtualizarAluno(int id, string nome, int idade)
         {
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
                 string query = "UPDATE Alunos SET Nome = :nome, Idade = :idade WHERE Id = :id";
                 OracleCommand cmd = new OracleCommand(query, conn);
-                cmd.Parameters.Add(new OracleParameter("nome", novoNome));
-                cmd.Parameters.Add(new OracleParameter("idade", novaIdade));
-                cmd.Parameters.Add(new OracleParameter("id", id));
-
+                cmd.Parameters.Add("nome", nome);
+                cmd.Parameters.Add("idade", idade);
+                cmd.Parameters.Add("id", id);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
-                if (rows > 0) MessageBox.Show("Dados atualizados!");
-                else MessageBox.Show("Registro não encontrado.");
+                if (rows > 0) MessageBox.Show("Aluno atualizado!");
+                else MessageBox.Show("ID não encontrado.");
             }
         }
 
-        // 4. Remove o Aluno do banco de dados
+        // Remover um aluno pelo ID
         private void RemoverAluno(int id)
         {
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
                 string query = "DELETE FROM Alunos WHERE Id = :id";
                 OracleCommand cmd = new OracleCommand(query, conn);
-                cmd.Parameters.Add(new OracleParameter("id", id));
-
+                cmd.Parameters.Add("id", id);
                 conn.Open();
                 int rows = cmd.ExecuteNonQuery();
                 if (rows > 0) MessageBox.Show("Aluno removido!");
-                else MessageBox.Show("Registro não encontrado.");
+                else MessageBox.Show("ID não encontrado.");
             }
         }
 
-        // 5. Busca um Aluno pelo ID
+        // Buscar um aluno pelo ID e preencher os campos
         private void BuscarPorId(int id)
         {
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
-                string query = "SELECT * FROM Alunos WHERE Id = :id";
+                // Query para selecionar o aluno específico
+                string query = "SELECT Nome, Idade FROM Alunos WHERE Id = :id";
                 OracleCommand cmd = new OracleCommand(query, conn);
-                cmd.Parameters.Add(new OracleParameter("id", id));
+                cmd.Parameters.Add("id", id);
 
-                conn.Open();
-                using (OracleDataReader reader = cmd.ExecuteReader())
+                try
                 {
-                    if (reader.Read())
+                    conn.Open();
+                    using (OracleDataReader reader = cmd.ExecuteReader())
                     {
-                        // No Oracle, nomes de colunas retornam em MAIÚSCULO por padrão
-                        MessageBox.Show($"Aluno: {reader["NOME"]}, Idade: {reader["IDADE"]}");
+                        if (reader.Read())
+                        {
+                            // Preenche as caixas de texto com os dados encontrados
+                            txtNome.Text = reader["NOME"].ToString();
+                            txtIdade.Text = reader["IDADE"].ToString();
+
+                            MessageBox.Show("Aluno encontrado e carregado nos campos!");
+                        }
+                        else
+                        {
+                            // Requisito Bônus: Mostrar mensagem quando não encontrar registro
+                            MessageBox.Show("Nenhum aluno encontrado com o ID informado.");
+                            LimparCampos();
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Aluno não encontrado (ID inexistente).");
-                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro na busca: " + ex.Message);
                 }
             }
         }
+
+        // Limpar os campos de texto
+        private void LimparCampos()
+        {
+            txtId.Clear();
+            txtNome.Clear();
+            txtIdade.Clear();
+        }
+    }
 }
