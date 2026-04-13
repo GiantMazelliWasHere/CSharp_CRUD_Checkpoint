@@ -1,0 +1,22 @@
+﻿<Window x:Class="C_Sharp_Crud.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sistema Escolar CRUD" Height="450" Width="600">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Background="#F0F0F0">
+            <TextBlock Text="Menu" FontSize="18" HorizontalAlignment="Center" Margin="10"/>
+            <Button Content="1 - Inserir Aluno" Click="BtnInserir_Click" Margin="5"/>
+            <Button Content="2 - Listar Alunos" Click="BtnListar_Click" Margin="5"/>
+            <Button Content="3 - Atualizar Aluno" Click="BtnAtualizar_Click" Margin="5"/>
+            <Button Content="4 - Remover Aluno" Click="BtnRemover_Click" Margin="5"/>
+            <Button Content="5 - Sair" Click="BtnSair_Click" Margin="5"/>
+        </StackPanel>
+
+        <DataGrid x:Name="dgAlunos" Grid.Column="1" Margin="10" AutoGenerateColumns="True" IsReadOnly="True"/>
+    </Grid>
+</Window>
